@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive HTML Input Types & Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            padding: 20px;
+            color: #333;
+        }
+        form {
+            max-width: 600px;
+            background: #fff;
+            padding: 30px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        fieldset {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        legend {
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 0 10px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group-inline {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        input, select, textarea {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        input:invalid:not(:placeholder-shown) {
+            border-color: #e74c3c;
+            background-color: #fdf2f2;
+        }
+        .submit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="#" method="POST">
+        <h2>Registration & Preferences Form</h2>
+        <p><small style="color: #e74c3c;">* Indicates a required field</small></p>
+
+        <!-- Text & Personal Data Components -->
+        <fieldset>
+            <legend>Personal Details</legend>
+            
+            <div class="form-group">
+                <label for="username">Username (Text) *</label>
+                <!-- required, minlength, maxlength validation -->
+                <input type="text" id="username" name="username" required minlength="3" maxlength="15" placeholder="3 to 15 characters">
+            </div>
+
+            <div class="form-group">
+                <label for="userpassword">Password *</label>
+                <!-- pattern validation (requires at least 1 number, 1 uppercase, 1 lowercase, 8+ total chars) -->
+                <input type="password" id="userpassword" name="userpassword" required 
+                       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" 
+                       placeholder="Min 8 chars, 1 uppercase, 1 number">
+            </div>
+
+            <div class="form-group">
+                <label for="useremail">Email Address (Email) *</label>
+                <!-- built-in email structural format check -->
+                <input type="email" id="useremail" name="useremail" required placeholder="example@domain.com">
+            </div>
+
+            <div class="form-group">
+                <label for="userphone">Phone Number (Tel)</label>
+                <!-- regex pattern format match validation -->
+                <input type="tel" id="userphone" name="userphone" pattern="[0-9]{10}" placeholder="10-digit mobile number">
+            </div>
+
+            <div class="form-group">
+                <label for="userage">Age (Number) *</label>
+                <!-- numeric boundaries max and min restrictions -->
+                <input type="number" id="userage" name="userage" required min="18" max="100" placeholder="Must be 18 - 100">
+            </div>
+
+            <div class="form-group">
+                <label for="userurl">Personal Website (URL)</label>
+                <!-- checks for absolute URL schemes (http:// or https://) -->
+                <input type="url" id="userurl" name="userurl" placeholder="https://example.com">
+            </div>
+
+            <div class="form-group">
+                <label for="usersearch">Search Query (Search)</label>
+                <!-- standard search input with internal clearing 'X' helper -->
+                <input type="search" id="usersearch" name="usersearch" placeholder="Type keywords...">
+            </div>
+        </fieldset>
+
+        <!-- Temporal / Date Components -->
+        <fieldset>
+            <legend>Temporal Selections</legend>
+
+            <div class="form-group">
+                <label for="appointment-date">Date Selection *</label>
+                <!-- validation ranges enforced on calendar layout selection picker -->
+                <input type="date" id="appointment-date" name="appointment-date" required min="2026-01-01" max="2027-12-31">
+            </div>
+
+            <div class="form-group">
+                <label for="appointment-time">Time Selection</label>
+                <input type="time" id="appointment-time" name="appointment-time">
+            </div>
+
+            <div class="form-group">
+                <label for="party-week">Target Week</label>
+                <input type="week" id="party-week" name="party-week">
+            </div>
+
+            <div class="form-group">
+                <label for="birth-month">Target Month</label>
+                <input type="month" id="birth-month" name="birth-month">
+            </div>
+
+            <div class="form-group">
+                <label for="exact-moment">Exact Timestamp (DateTime-Local)</label>
+                <input type="datetime-local" id="exact-moment" name="exact-moment">
+            </div>
+        </fieldset>
+
+        <!-- Structural UI Toggles & Choice Elements -->
+        <fieldset>
+            <legend>Preferences & Custom Inputs</legend>
+
+            <div class="form-group">
+                <label for="satisfaction">Satisfaction Rating (Range)</label>
+                <!-- steps increments validation attributes tracking -->
+                <input type="range" id="satisfaction" name="satisfaction" min="1" max="10" step="1" value="5">
+            </div>
+
+            <div class="form-group-inline">
+                <label for="favcolor">Theme Accent Color (Color):</label>
+                <input type="color" id="favcolor" name="favcolor" value="#3498db">
+            </div>
+
+            <div class="form-group">
+                <label for="resume">Upload Document (File) *</label>
+                <!-- restricts target file type uploads via extensions validation -->
+                <input type="file" id="resume" name="resume" required accept=".pdf,.docx">
+            </div>
+
+            <div class="form-group">
+                <label>Gender Identification (Radio) *</label>
+                <div class="form-group-inline">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male" style="font-weight:normal;">Male</label>
+                    
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female" style="font-weight:normal;">Female</label>
+                    
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other" style="font-weight:normal;">Other</label>
+                </div>
+            </div>
+
+            <div class="form-group-inline">
+                <!-- standalone boolean toggle validation rule check -->
+                <input type="checkbox" id="terms" name="terms" required>
+                <label for="terms">I accept the Terms and Conditions *</label>
+            </div>
+        </fieldset>
+
+        <!-- Hidden and Action inputs -->
+        <!-- hidden element tracking technical IDs or security tokens -->
+        <input type="hidden" id="form-token" name="form-token" value="secure_token_xyz123">
+
+        <button type="submit" class="submit-btn">Validate & Submit Form</button>
+    </form>
+
+</body>
+</html>

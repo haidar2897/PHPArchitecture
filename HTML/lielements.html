@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semantic Components Demo: Lists, Dropdowns & Tabs</title>
+    <style>
+        /* --- Global Reset & Core Styling --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        section {
+            background: #ffffff;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- 1. Navigation & Dropdown Styling --- */
+        .navbar {
+            background-color: #2c3e50;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        /* Semantic list for navigation */
+        .nav-list {
+            list-style: none;
+            display: flex;
+        }
+        .nav-item {
+            position: relative; /* Context for absolute dropdown positioning */
+        }
+        .nav-link {
+            display: block;
+            padding: 15px 25px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #34495e;
+        }
+        /* Dropdown Menu Container */
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 200px;
+            list-style: none;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            z-index: 10;
+        }
+        .dropdown-menu li a {
+            color: #333;
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .dropdown-menu li a:hover {
+            background-color: #f1f2f6;
+            color: #2c3e50;
+        }
+        /* Display dropdown on hover */
+        .nav-item:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* --- 2. Standard Semantics Lists (`li`) --- */
+        .demo-list {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        .demo-list li {
+            margin-bottom: 8px;
+        }
+        /* Custom styling for a list group layout */
+        .list-group {
+            list-style: none;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .list-group-item {
+            padding: 12px 20px;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .list-group-item:last-child {
+            border-bottom: none;
+        }
+        .badge {
+            background-color: #4a90e2;
+            color: white;
+            padding: 3px 8px;
+            font-size: 12px;
+            border-radius: 12px;
+        }
+
+        /* --- 3. Pure CSS Tabs Styling --- */
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        /* Hide the radio inputs completely */
+        .tab-input {
+            display: none;
+        }
+        /* Tab Labels (The clickable buttons) */
+        .tab-label {
+            padding: 12px 24px;
+            background: #e9ecef;
+            color: #495057;
+            cursor: pointer;
+            font-weight: 600;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            margin-right: 4px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            transition: all 0.3s;
+        }
+        .tab-label:hover {
+            background: #dee2e6;
+        }
+        /* Tab Content Box */
+        .tab-panel {
+            width: 100%;
+            padding: 25px;
+            background: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 0 4px 4px 4px;
+            display: none; /* Hide panels by default */
+            order: 1; /* Pushes content below the labels */
+        }
+        /* CSS Logic to connect radio input state to label and panel visibility */
+        #tab1:checked ~ label[for="tab1"],
+        #tab2:checked ~ label[for="tab2"],
+        #tab3:checked ~ label[for="tab3"] {
+            background: #ffffff;
+            color: #4a90e2;
+            border-top: 3px solid #4a90e2;
+            position: relative;
+            z-index: 2;
+        }
+        #tab1:checked ~ #content1,
+        #tab2:checked ~ #content2,
+        #tab3:checked ~ #content3 {
+            display: block; /* Show panel when matching radio is checked */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- COMPONENT 1: Navigation with a Dropdown Menu -->
+        <header>
+            <h1>Component 1: Navigation Menu with Dropdown</h1>
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                    <!-- Dropdown Parent Element -->
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Services ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">SEO Optimization</a></li>
+                            <li><a href="#">Cloud Hosting</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="#" class="nav-link">Portfolio</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- COMPONENT 2: Semantic List Handling -->
+        <section>
+            <h2>Component 2: Proper List (`&lt;li&gt;`) Architecture</h2>
+            <p style="margin-bottom: 15px;">Lists are vital for semantic code. Below is a traditional bulleted list and a structured list group component using `&lt;ul&gt;` and `&lt;li&gt;` blocks.</p>
+            
+            <h3>Standard Bulleted List</h3>
+            <ul class="demo-list">
+                <li>Items should always be enclosed inside a parent <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> element.</li>
+                <li>Provides accessible text architecture tools for web screen readers.</li>
+                <li>Can easily be styled away from standard bullets for clean layouts.</li>
+            </ul>
+
+            <h3>Styled Dashboard List Group</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span>Account Settings Update</span>
+                    <span class="badge">Completed</span>
+                </li>
+                <li class="list-group-item">
+                    <span>Database Backup Protocol</span>
+                    <span class="badge">System</span>
+                </li>
+                <li class="list-group-item">
+                    <span>Pending Invites Validation</span>
+                    <span class="badge" style="background-color: #e74c3c;">2 Alert</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- COMPONENT 3: Functional CSS Tabs Switches -->
+        <section>
+            <h2>Component 3: Interactive Tabs Interface (CSS-Only)</h2>
+            <p style="margin-bottom: 20px;">This panel uses hidden HTML radio checkboxes combined with CSS sibling selectors (<code>~</code>) to toggle tabs instantly without writing JavaScript.</p>
+            
+            <div class="tabs-container">
+                <!-- Radio Input Handles -->
+                <input type="radio" name="my-tabs" id="tab1" class="tab-input" checked>
+                <label for="tab1" class="tab-label">HTML Overview</label>
+                
+                <input type="radio" name="my-tabs" id="tab2" class="tab-input">
+                <label for="tab2" class="tab-label">CSS Architecture</label>
+                
+                <input type="radio" name="my-tabs" id="tab3" class="tab-input">
+                <label for="tab3" class="tab-label">Accessibility</label>
+
+                <!-- Panel Content 1 -->
+                <div id="content1" class="tab-panel">
+                    <h3>Semantic HTML Markup</h3>
+                    <p>Using semantic HTML elements means introducing tags that clearly describe their meaning to both the browser and the developer. For example, using tags like <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, or <code>&lt;ul&gt;</code> instead of plain layout divisions enhances structure drastically.</p>
+                </div>
+
+                <!-- Panel Content 2 -->
+                <div id="content2" class="tab-panel">
+                    <h3>Cascading Style Sheets (CSS)</h3>
+                    <p>CSS dictates the visual expression of semantic structures. By maintaining structural encapsulation (like using <code>position: absolute</code> inside a parent configured with <code>position: relative</code>), interactive features such as drop-downs operate smoothly using basic native rendering flows.</p>
+                </div>
+
+                <!-- Panel Content 3 -->
+                <div id="content3" class="tab-panel">
